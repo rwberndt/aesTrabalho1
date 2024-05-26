@@ -1,6 +1,7 @@
+//Ricardo Berndt
+//Lorhan Melo
+
 package aes;
-
-
 import aes.tables.Tabelas;
 import aes.Extensions.Extensions;
 
@@ -15,7 +16,7 @@ public class MatrizEstado {
 
     private MatrizEstado(int[] text) {
         if (text.length != 16) {
-            throw new IllegalArgumentException("Password must be 128 bits");
+            throw new IllegalArgumentException("Chaves devem ter 128bits");
         }
 
         int index = 0;
@@ -29,7 +30,7 @@ public class MatrizEstado {
 
     private MatrizEstado(int[] firstKey, int[] secondKey, int[] thirdKey, int[] fourthKey) {
         if (firstKey.length != 4 || secondKey.length != 4 || thirdKey.length != 4 || fourthKey.length != 4) {
-            throw new IllegalArgumentException("Password must be 128 bits: all the words must have 32 bits");
+            throw new IllegalArgumentException("");
         }
 
         for (int i = 0; i < 4; i++) {

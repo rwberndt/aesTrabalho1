@@ -1,67 +1,71 @@
+//Ricardo Berndt
+//Lorhan Melo
+
+
 import aes.AES;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.swing.*;
+import java.util.Scanner;
+import java.util.stream.IntStream;
+
 import java.io.File;
 
 
 public class Main {
 
-private static final File PROJECT_DIR = new File(".");
-private static final JFileChooser FILE_CHOOSER = new JFileChooser();
-    public static void main(String[] args) {
-
+    public static void main(String[] args) 
+    {
+        Scanner scanner = new Scanner(System.in);
+      
         //pegar arquivo do usuário
-        FILE_CHOOSER.setCurrentDirectory(PROJECT_DIR);
-        FILE_CHOOSER.setDialogTitle("Selecione um arquivo para criptografar");
-        FILE_CHOOSER.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FILE_CHOOSER.showOpenDialog(null);
-        File fileToEncrypt = FILE_CHOOSER.getSelectedFile();
+        System.out.println("Digite o caminho completo para o arquivo a ser criptografado ():");
+        String inputPath = scanner.nextLine();
+        File fileToEncrypt = new File(inputPath);
+
 
         // pegar chave de cripto
-        String password = JOptionPane.showInputDialog("Insira a chave de criptografia do arquivo (128 bits):");
-        while (password.split(",").length != 16) {
-            JOptionPane.showMessageDialog(null, "Tamanho da chave errado: a chave deve conter 16 caracteres.");
-            password = JOptionPane.showInputDialog("Insira a chave de criptografia do arquivo (128 bits):");
-        }
+        System.out.println("Digite a chave (bytes separados por ','):");
+        String password = scanner.nextLine();
 
+      
         // pegar diretorio de saída 
-        FILE_CHOOSER.setCurrentDirectory(PROJECT_DIR);
-        FILE_CHOOSER.setDialogTitle("Selecione a pasta de destino para salvar o arquivo.");
-        FILE_CHOOSER.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        FILE_CHOOSER.showSaveDialog(null);
-        String path = FILE_CHOOSER.getSelectedFile().getPath();
+        System.out.println("Digite o caminho completo de saída para o arquivo criptografado ():");
+        String outputPath = scanner.nextLine();
+        File outputFile = new File(outputPath);
 
-        //Novo nome do arquivo de saída
-        String fileName = JOptionPane.showInputDialog("Insira o nome do arquivo:");
-        fileName = fileName.contains(".") ? fileName : fileName.concat(".txt");
-
-        int[] result = AES.encriptar(Extensions.byteToIntArray(LerConteudoArquivo(fileToEncrypt.getPath())), password);
-
-        boolean fileSave = SalvarConteudoArquivo(path + "\\" + fileName, Extensions.intToByteArray(result));
-
-        JOptionPane.showMessageDialog(null, fileSave ? "Arquivo Salvo com sucesso" : "Não foi possível salvar o arquivo");
-    }
-
-
-
-
-
-    public static boolean SalvarConteudoArquivo(String path, byte[] content) {
-        try (FileOutputStream fos = new FileOutputStream(path)) {
-            fos.write(content);
+        byte[] bytes;
+        try (FileInputStream fis = new FileInputStream(fileToEncrypt.getPath())) {
+             bytes = fis.readAllBytes();
         } catch (IOException e) {
-            return false;
+            throw new RuntimeException("Erro ao ler o arquivo de entrada");
         }
-        return true;
-    }
 
-    public static byte[] LerConteudoArquivo(String path) {
-        try (FileInputStream fis = new FileInputStream(path)) {
-            return fis.readAllBytes();
-        } catch (IOException e) {
-            throw new RuntimeException("Error when trying to read the selected file");
+
+        int[] encriptado = AES.encriptar(byteToIntArray(bytes), password);
+
+
+        try (FileOutputStream fos = new FileOutputStream(outputFile.getPath())) {
+            fos.write(intToByteArray(encriptado));
+        }
+         catch (IOException e) {
+            throw new RuntimeException("Erro ao salvar o arquivo de saida");
         }
     }
+
+
+
+
+
+       static int[] byteToIntArray(byte[] array) {
+        return IntStream.range(0, array.length).map(i -> array[i]).toArray();
+        }
+
+        static byte[] intToByteArray(int[] array) {
+            byte[] newArray = new byte[array.length];
+            for (int i = 0; i < array.length; i++) {
+                newArray[i] = (byte) array[i];
+            }
+            return newArray;
+        }
 }

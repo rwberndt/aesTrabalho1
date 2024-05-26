@@ -1,3 +1,7 @@
+//Ricardo Berndt
+//Lorhan Melo
+
+
 package aes.Extensions;
 
 import aes.MatrizEstado;
@@ -8,15 +12,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Extensions {
-    public static final List<int[]> MULTIPLACATION_MATRIX_ROWS = MatrizEstado.deChave("2,1,1,3,3,2,1,1,1,3,2,1,1,1,3,2").getLinhas();
-
-    public static int[] getMultiMatrixRow(int index) {
-        return MULTIPLACATION_MATRIX_ROWS.get(index);
-    }
-
-    public static int[] substituirPalavra(int[] words) {
-        return Arrays.stream(words).map(Tabelas::PegarValorTabelaSbox).toArray();
-    }
+    public static final List<int[]> matrix_linhas_multiplicar = MatrizEstado.deChave("2,1,1,3,3,2,1,1,1,3,2,1,1,1,3,2").getLinhas();
 
     public static int[] rotacionarArray(int[] array) {
         return new int[]{array[1], array[2], array[3], array[0]};
@@ -25,11 +21,11 @@ public class Extensions {
     public static int[] getRoundConstant(int index) {
         return new int[]{pegarRoundConstant(index), 0, 0, 0};
     }
-
-    public static int[] aplicarXor(int[] first, int[] second) {
-        return IntStream.range(0, 4).map(i -> first[i] ^ second[i]).toArray();
+    
+    public static int[] getMultiMatrixRow(int index) {
+        return matrix_linhas_multiplicar.get(index);
     }
-
+    
     public static int[] pkcs7(int[] simpleText, int blockSize) {
         int textLength = simpleText.length;
         int qdtCharAppend = blockSize - textLength % blockSize;
@@ -62,4 +58,11 @@ public class Extensions {
         return VALUES.get(index);
     }
 
+    public static int[] aplicarXor(int[] first, int[] second) {
+        return IntStream.range(0, 4).map(i -> first[i] ^ second[i]).toArray();
+    }
+
+    public static int[] substituirPalavra(int[] words) {
+        return Arrays.stream(words).map(Tabelas::PegarValorTabelaSbox).toArray();
+    }
 }
