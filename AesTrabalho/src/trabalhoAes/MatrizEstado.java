@@ -1,7 +1,7 @@
 //Ricardo Berndt
 //Lorhan Melo
 
-package aes;
+package trabalhoAes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

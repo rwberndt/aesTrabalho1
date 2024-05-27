@@ -2,14 +2,16 @@
 //Lorhan Melo
 
 
-import aes.AES;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import java.io.File;
+import trabalhoAes.AES;
+
+import java.io.FileInputStream;
+
 
 
 public class Main {

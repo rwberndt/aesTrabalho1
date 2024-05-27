@@ -2,7 +2,7 @@
 //Lorhan Melo
 
 
-package aes;
+package trabalhoAes;
 
 import java.util.Map;
 import java.util.Arrays;

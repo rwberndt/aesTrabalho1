@@ -2,7 +2,7 @@
 //Lorhan Melo
 
 
-package aes;
+package trabalhoAes;
 
 public class AES {
     private static final int TAMANHO_BLOCO = 16;
