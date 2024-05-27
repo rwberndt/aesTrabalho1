@@ -1,4 +1,4 @@
-package aes.tables;
+package aes;
 
 public class Tabelas {
 

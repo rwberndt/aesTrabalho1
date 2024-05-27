@@ -4,8 +4,6 @@
 
 package aes;
 
-import aes.Extensions.Extensions;
-
 public class AES {
     private static final int TAMANHO_BLOCO = 16;
 

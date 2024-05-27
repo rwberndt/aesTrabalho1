@@ -2,9 +2,6 @@
 //Lorhan Melo
 
 package aes;
-import aes.tables.Tabelas;
-import aes.Extensions.Extensions;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

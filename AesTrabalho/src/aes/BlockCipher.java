@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import aes.Extensions.Extensions;
-
 public class BlockCipher {
 
     public static int[] encriptarArray(int[] simpleText, String key) {

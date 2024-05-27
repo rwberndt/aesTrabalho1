@@ -2,10 +2,8 @@
 //Lorhan Melo
 
 
-package aes.Extensions;
+package aes;
 
-import aes.MatrizEstado;
-import aes.tables.Tabelas;
 import java.util.Map;
 import java.util.Arrays;
 import java.util.List;
