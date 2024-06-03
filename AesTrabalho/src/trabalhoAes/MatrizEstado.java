@@ -12,9 +12,6 @@ public class MatrizEstado {
     private final int[][] words = new int[4][4];
 
     private MatrizEstado(int[] text) {
-        if (text.length != 16) {
-            throw new IllegalArgumentException("Chaves devem ter 128bits");
-        }
 
         int index = 0;
 

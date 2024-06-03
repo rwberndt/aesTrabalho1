@@ -24,7 +24,7 @@ public class Tabelas {
     };
 
     public static int PegarValorTabelaSbox(int value) {
-        int upperFourBits = value >> 4;
+        int upperFourBits = (value & 0xF0) >> 4;
         int lowerFourBits = value & 0x0F;
         return TABLESbox[upperFourBits][lowerFourBits];
     }
